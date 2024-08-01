@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Manga Search",
+  "version": "1.0",
+
+  "description": "Search through various Japanese sites + MAL.",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["contextMenus"]
+}
