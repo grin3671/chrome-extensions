@@ -5,6 +5,18 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.create({
+  id: "jisho",
+  title: "Search on Jisho \u201C%s\u201D",
+  contexts: ["selection"],
+});
+
+chrome.contextMenus.create({
+  id: "separator1",
+  type: "separator",
+  contexts: ["selection"]
+});
+
+chrome.contextMenus.create({
   id: "cmoa",
   title: "Search on CMOA \u201C%s\u201D",
   contexts: ["selection"],
@@ -25,6 +37,12 @@ chrome.contextMenus.create({
 chrome.contextMenus.create({
   id: "ebookjapan",
   title: "Search on EBookJapan \u201C%s\u201D",
+  contexts: ["selection"],
+});
+
+chrome.contextMenus.create({
+  id: "natalie",
+  title: "Search on Natalie \u201C%s\u201D",
   contexts: ["selection"],
 });
 
@@ -58,15 +76,29 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
       });
       break;
 
-      case "ebookjapan":
-        chrome.tabs.create({
-          url: "https://ebookjapan.yahoo.co.jp/search/?keyword=" + encodeURIComponent(info.selectionText),
-          active: true
-        });
-        break;
-  
+    case "ebookjapan":
+      chrome.tabs.create({
+        url: "https://ebookjapan.yahoo.co.jp/search/?keyword=" + encodeURIComponent(info.selectionText),
+        active: true
+      });
+      break;
+
+    case "jisho":
+      chrome.tabs.create({
+        url: "https://jisho.org/search/" + encodeURIComponent(info.selectionText),
+        active: true
+      });
+      break;
+
+    case "natalie":
+      chrome.tabs.create({
+        url: "https://natalie.mu/search?context=news&query=" + encodeURIComponent(info.selectionText),
+        active: true
+      });
+      break;
+
     default:
-      console.log('tab:' + tab);
+      console.log('tab:' + tab + ". Listener for the action with id '" + info.menuItemId + "' not found!");
       break;
   }
 });
